@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hyperledger Fabric</title>
+        <link rel="stylesheet" href="/style.css" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" type="text/css"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script> 
+
+    </head>
+    <body style="background-color: rgba(19, 35, 47, .9);">
+
+        <div class="form">
+      
+            <ul class="tab-group">
+                <a href="./register"><li class="tab active">Sign Up</li></a>
+                    <a href="./login"><li class="tab">Log In</li></a>
+            </ul>
+            
+            <div >
+              
+              <div id="login">   
+                <h1>Welcome Back!</h1>
+                
+                <form action="/login_c" method="post">
+                
+                  <div class="field-wrap">
+                  <label>
+                    Email Address<span class="req">*</span>
+                  </label>
+                  <input type="email"required autocomplete="off" name="email"/>
+                </div>
+                <div class="field-wrap">
+                  <label>
+                    Id-Card Number<span class="req">*</span>
+                  </label>
+                  <input type="text"required autocomplete="off" name="idCard"/>
+                </div>
+                
+                <div class="field-wrap">
+                  <label>
+                    Password<span class="req">*</span>
+                  </label>
+                  <input type="password"required autocomplete="off" name="pass"/>
+                </div>
+                                
+                <button class="button button-block"/>Log In</button>
+                
+                </form>
+      
+              </div>
+              
+            </div>
+            
+      </div> 
+        
+ 
+
+        
+
+
+<script>
+
+$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+  
+  var $this = $(this),
+      label = $this.prev('label');
+
+	  if (e.type === 'keyup') {
+			if ($this.val() === '') {
+          label.removeClass('active highlight');
+        } else {
+          label.addClass('active highlight');
+        }
+    } else if (e.type === 'blur') {
+    	if( $this.val() === '' ) {
+    		label.removeClass('active highlight'); 
+			} else {
+		    label.removeClass('highlight');   
+			}   
+    } else if (e.type === 'focus') {
+      
+      if( $this.val() === '' ) {
+    		label.removeClass('highlight'); 
+			} 
+      else if( $this.val() !== '' ) {
+		    label.addClass('highlight');
+			}
+    }
+
+});
+
+$('.tab a').on('click', function (e) {
+  
+  e.preventDefault();
+  
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+  
+  target = $(this).attr('href');
+
+  $('.tab-content > div').not(target).hide();
+  
+  $(target).fadeIn(600);
+  
+});
+</script>
+<style>
+  a:hover{
+  text-decoration: none;
+  }
+  </style>            
+  </body>
+</html>

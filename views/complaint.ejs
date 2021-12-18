@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hyperledger Fabric</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        type="text/javascript"></script>
+
+</head>
+
+<body style="background-color: rgba(19, 35, 47, .9);">
+    <div class="container">
+
+
+        <main>
+            <div class="main__container">
+                <!-- MAIN TITLE STARTS HERE -->
+
+                <div class="main__title">
+                    <img src="assets/hello.svg" alt="" />
+                    <div class="main__greeting">
+                        <h1>Smart Policing System</h1>
+                        <p>File New Complaint</p>
+                    </div>
+                </div>
+                <div class="form">
+
+
+                    <div>
+                        <h1>File new Complaint</h1>
+
+                        <form action="/complaint_c" method="post">
+
+                            <div class="field-wrap">
+                                <label>
+                                    Enter Name<span class="req">*</span>
+                                </label>
+                                <input type="text" required autocomplete="off" name="name" />
+                            </div>
+
+                            <div class="field-wrap">
+                                <label>
+                                    Enter Id Card number<span class="req">*</span>
+                                </label>
+                                <input type="text" required autocomplete="off" name="idCard" />
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Email Address<span class="req">*</span>
+                                </label>
+                                <input type="email" required autocomplete="off" name="email" />
+                            </div>
+
+                            <div class="field-wrap">
+                                <label>
+                                    Phone number<span class="req">*</span>
+                                </label>
+                                <input type="text" required autocomplete="off" name="phone" />
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    <span class="req"></span>
+                                </label>
+                                <input type="date" required autocomplete="off" name="date" />
+                            </div>
+
+                            <div class="field-wrap">
+
+                                <label for="casetype">Choose case type:</label>
+                                <div style="padding-left:250px ; padding-top: 12px;">
+                                    <select id="casetype" name="case">
+                                        <option value="Murder">Murder</option>
+                                        <option value="Robbery">Robbery</option>
+                                        <option value="Harrasement">Harrasement</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    <span class="req"></span>
+                                </label>
+                                <input type="file" required autocomplete="off" name="result" id="result"/>
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Description<span class="req">*</span>
+                                </label>
+                                <textarea id="desc" name="desc" rows="4" cols="50"></textarea>
+                                <button type="submit" class="button button-block">Submit</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+
+
+        </main>
+
+        <div id="sidebar">
+            <div class="sidebar__title">
+                <div class="sidebar__img">
+                    <img src="assets/logo.png" alt="logo" />
+                    <h1>SPS</h1>
+                </div>
+                <i onclick="closeSidebar()" class="fa fa-times" id="sidebarIcon" aria-hidden="true"></i>
+            </div>
+            <div class="sidebar__menu">
+                <div class="sidebar__link active_menu_link">
+                    <i class="fa fa-home"></i>
+                    <a href="dashboard">Dashboard</a>
+                </div>
+                <div class="sidebar__link">
+                    <i class="fa fa-user-secret" aria-hidden="true"></i>
+                    <a href="complaint">New Complaint</a>
+                </div>
+                <div class="sidebar__link">
+                    <i class="fa fa-building-o"></i>
+                    <a href="#">View Complaint</a>
+                </div>
+                <div class="sidebar__logout">
+                    <i class="fa fa-power-off"></i>
+                    <a href="#">Log out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="script.js"></script>
+
+
+
+
+
+
+
+
+    <script>
+
+        $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+            var $this = $(this),
+                label = $this.prev('label');
+
+            if (e.type === 'keyup') {
+                if ($this.val() === '') {
+                    label.removeClass('active highlight');
+                } else {
+                    label.addClass('active highlight');
+                }
+            } else if (e.type === 'blur') {
+                if ($this.val() === '') {
+                    label.removeClass('active highlight');
+                } else {
+                    label.removeClass('highlight');
+                }
+            } else if (e.type === 'focus') {
+
+                if ($this.val() === '') {
+                    label.removeClass('highlight');
+                }
+                else if ($this.val() !== '') {
+                    label.addClass('highlight');
+                }
+            }
+
+        });
+
+        var img = document.getElementById('result');
+        img.crossOrigin = 'Anonymous';
+        img.onload = function () {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.height = this.naturalHeight;
+            canvas.width = this.naturalWidth;
+            ctx.drawImage(this, 0, 0);
+            var data = canvas.toDataURL('image/jpg').split(';base64,')[1];
+            console.log(data);
+            document.getElementById('result').innerHTML = data;
+        }
+
+    </script>
+    <style>
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
+</body>
+
+</html>
