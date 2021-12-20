@@ -217,7 +217,7 @@ router.post('/login_c', function (req, res) {
 
                 // Submit the specified transaction.
                 // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
-                var login = await contract.evaluateTransaction('Login', req.body.email, req.body.pass);
+                           var login = await contract.evaluateTransaction('Login', req.body.email, req.body.pass);
                 console.log(login.toString());
                 console.log(req.body.pass);
                 console.log(req.body.email);
@@ -225,9 +225,9 @@ router.post('/login_c', function (req, res) {
                 if (login.toString() == 'true') {
                     session = req.session;
                     session.userid = req.body.email;
-                    res.redirect('/dashboard')
                     console.log(req.session)
                     console.log("Login successfully");
+                    res.redirect('/dashboard')
 
                     // Disconnect from the gateway.
 
